@@ -4,16 +4,19 @@
 #include <iostream>
 #include"Helper.h"
 
+void printOdd(int N, bool isOdd) {
+	for (int i = 0; i <= N/2; i++)
+	{
+		std::cout << 2 * i + isOdd << std::endl;
+	}
+}
+
 
 int main()
 {
-	std::string s = "any word";
-	std::cout << s << std::endl;
-	std::cout << "length: " << s.length() << std::endl;
-	std::cout << "first letter: " << s[0] << std::endl;
-	std::cout << "last letter: " << s[s.length()-1] << std::endl;
-
-
+	int N = 19;
+	const bool isOdd = true;
+	printOdd(N, isOdd);
 	return 0;
 }
 
