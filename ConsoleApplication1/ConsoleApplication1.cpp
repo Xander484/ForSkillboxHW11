@@ -7,10 +7,12 @@
 
 int main()
 {
-	int a, b;
-	std::cin >> a >> b;
+	std::string s = "any word";
+	std::cout << s << std::endl;
+	std::cout << "length: " << s.length() << std::endl;
+	std::cout << "first letter: " << s[0] << std::endl;
+	std::cout << "last letter: " << s[s.length()-1] << std::endl;
 
-	std::cout << sumSquare(a, b);
 
 	return 0;
 }
