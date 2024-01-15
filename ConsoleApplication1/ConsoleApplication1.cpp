@@ -2,21 +2,26 @@
 //
 
 #include <iostream>
-#include"Helper.h"
 
-void printOdd(int N, bool isOdd) {
-	for (int i = 0; i <= N/2; i++)
+void printOddNumbers(int Limit, bool isOdd) {
+	for (int i = isOdd; i <= Limit; i+=2)
 	{
-		std::cout << 2 * i + isOdd << std::endl;
+		std::cout << i << " ";
 	}
+	std::cout << std::endl;
 }
+
+
+
 
 
 int main()
 {
-	int N = 19;
+	const int N = 32;
 	const bool isOdd = true;
-	printOdd(N, isOdd);
+
+	printOddNumbers(N, isOdd);
+
 	return 0;
 }
 
