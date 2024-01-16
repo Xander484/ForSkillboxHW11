@@ -2,25 +2,44 @@
 //
 
 #include <iostream>
-
-void printOddNumbers(int Limit, bool isOdd) {
-	for (int i = isOdd; i <= Limit; i+=2)
-	{
-		std::cout << i << " ";
-	}
-	std::cout << std::endl;
-}
-
-
-
+#include <time.h>
 
 
 int main()
 {
-	const int N = 32;
-	const bool isOdd = true;
+	struct tm buf;
+	time_t t = time(NULL);
+	localtime_s(&buf, &t);
+	const int N = 13;
+	int index = buf.tm_mday%N;
 
-	printOddNumbers(N, isOdd);
+	int** massiv = new int*[N];
+	for (int i = 0; i < N; i++)
+	{
+		massiv[i] = new int[N];
+	}
+
+	for (int i = 0; i < N; i++){
+		for (int j = 0; j < N; j++) {
+			massiv[i][j] = j + i;
+		}
+	}
+
+	for (int i = 0; i < N; i++) {
+		for (int j = 0; j < N; j++) {
+			std::cout << massiv[i][j] << "\t";
+		}
+		std::cout << "\n";
+	}
+
+	int sum = 0;
+
+	for (int i = 0; i < N; i++)
+	{
+		sum += massiv[index][i];
+	}
+
+	std::cout << sum << std::endl;
 
 	return 0;
 }
