@@ -4,42 +4,40 @@
 #include <iostream>
 #include <time.h>
 
+class Vector
+{
+public:
+	Vector();
+	Vector(double _x, double _y, double _z);
+
+	void show() {
+		std::cout << x << ", " << y << ", " << z << std::endl;
+	}
+
+	double Length() {
+		return sqrt(x * x + y * y + z * z);
+	}
+
+private:
+	double x, y, z;
+};
+
+Vector::Vector(): x(0), y(0), z(0)
+{
+}
+
+Vector::Vector(double _x, double _y, double _z) : x(_x), y(_y), z(_z)
+{
+}
+
 
 int main()
 {
-	struct tm buf;
-	time_t t = time(NULL);
-	localtime_s(&buf, &t);
-	const int N = 13;
-	int index = buf.tm_mday%N;
-
-	int** massiv = new int*[N];
-	for (int i = 0; i < N; i++)
-	{
-		massiv[i] = new int[N];
-	}
-
-	for (int i = 0; i < N; i++){
-		for (int j = 0; j < N; j++) {
-			massiv[i][j] = j + i;
-		}
-	}
-
-	for (int i = 0; i < N; i++) {
-		for (int j = 0; j < N; j++) {
-			std::cout << massiv[i][j] << "\t";
-		}
-		std::cout << "\n";
-	}
-
-	int sum = 0;
-
-	for (int i = 0; i < N; i++)
-	{
-		sum += massiv[index][i];
-	}
-
-	std::cout << sum << std::endl;
+	Vector a(12, 16, 15), b;
+	a.show();
+	std::cout << a.Length() << std::endl;
+	b.show();
+	std::cout << b.Length() << std::endl;
 
 	return 0;
 }
