@@ -6,54 +6,43 @@
 #include <vector>
 #include <algorithm>
 
-class Test
+class Animal
 {
 public:
-	Test();
-	Test(std::string _name, int _lifes);
-	std::string name;
-	void setName(std::string _name);
-	void setLifes(int _lifes);
-
-	bool operator<(const Test& other) const {
-		// Compare based on the 'value' member
-		if (lifes != other.lifes) {
-			return lifes > other.lifes;
-		}
-		return name > other.name;
+	virtual void voice() {
+		std::cout << "unknown\n";
 	}
-	int lifes;
-
-private:
 };
 
-Test::Test(std::string _name, int _lifes):lifes(_lifes), name(_name)
-{}
-
-
+class Dog : public Animal {
+public:
+	void voice() override {
+		std::cout << "vaf vaf\n";
+	}
+};
+class Cat : public Animal {
+public:
+	void voice() override {
+		std::cout << "meow meow\n";
+	}
+};
+class Sheep : public Animal {
+public:
+	void voice() override {
+		std::cout << "Baaa baaa\n";
+	}
+};
 
 int main()
 {
-	int playerCnt;
-	std::cin >> playerCnt;
-	std::vector<Test> players;
+	Animal** a = new Animal*[3];
+	a[0] = new Dog;
+	a[1] = new Cat;
+	a[2] = new Sheep;
 
-	std::string name;
-	int life;
-	for (int i = 0; i < playerCnt; i++)
+	for (int i = 0; i < 3; i++)
 	{
-		std::cout << "name" << i + 1 << ": ";
-		std::cin >> name;
-		std::cout << "lifes: ";
-		std::cin >> life;
-		players.push_back(Test(name, life));
-	}
-
-	std::sort(players.begin(), players.end());
-
-	for (int i = 0; i < playerCnt; i++)
-	{
-		std::cout << players[i].name << " " << players[i].lifes << std::endl;
+		a[i]->voice();
 	}
 
 	return 0;
