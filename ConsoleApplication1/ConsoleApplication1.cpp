@@ -3,41 +3,58 @@
 
 #include <iostream>
 #include <time.h>
+#include <vector>
+#include <algorithm>
 
-class Vector
+class Test
 {
 public:
-	Vector();
-	Vector(double _x, double _y, double _z);
+	Test();
+	Test(std::string _name, int _lifes);
+	std::string name;
+	void setName(std::string _name);
+	void setLifes(int _lifes);
 
-	void show() {
-		std::cout << x << ", " << y << ", " << z << std::endl;
+	bool operator<(const Test& other) const {
+		// Compare based on the 'value' member
+		if (lifes != other.lifes) {
+			return lifes > other.lifes;
+		}
+		return name > other.name;
 	}
-
-	double Length() {
-		return sqrt(x * x + y * y + z * z);
-	}
+	int lifes;
 
 private:
-	double x, y, z;
 };
 
-Vector::Vector(): x(0), y(0), z(0)
-{
-}
+Test::Test(std::string _name, int _lifes):lifes(_lifes), name(_name)
+{}
 
-Vector::Vector(double _x, double _y, double _z) : x(_x), y(_y), z(_z)
-{
-}
 
 
 int main()
 {
-	Vector a(12, 16, 15), b;
-	a.show();
-	std::cout << a.Length() << std::endl;
-	b.show();
-	std::cout << b.Length() << std::endl;
+	int playerCnt;
+	std::cin >> playerCnt;
+	std::vector<Test> players;
+
+	std::string name;
+	int life;
+	for (int i = 0; i < playerCnt; i++)
+	{
+		std::cout << "name" << i + 1 << ": ";
+		std::cin >> name;
+		std::cout << "lifes: ";
+		std::cin >> life;
+		players.push_back(Test(name, life));
+	}
+
+	std::sort(players.begin(), players.end());
+
+	for (int i = 0; i < playerCnt; i++)
+	{
+		std::cout << players[i].name << " " << players[i].lifes << std::endl;
+	}
 
 	return 0;
 }
